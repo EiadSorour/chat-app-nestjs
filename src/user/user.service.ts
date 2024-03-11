@@ -24,4 +24,12 @@ export class UserService{
             throw new HttpException(error.message , HttpStatus.BAD_REQUEST);
         }
     }
+
+    async deleteUser(username:string): Promise<number>{
+        try{
+            return await this.userModel.destroy({where: {username:username}});
+        }catch(error){
+            throw new HttpException(error.message , HttpStatus.BAD_REQUEST);
+        }
+    }
 }
