@@ -8,6 +8,6 @@ import { MessageService } from "./message.service";
     imports: [SequelizeModule.forFeature([Message])],
     controllers: [MessageController],
     providers: [MessageService],
-    exports: []
+    exports: [MessageService]
 })
 export class MessageModule{}

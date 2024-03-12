@@ -31,4 +31,9 @@ export class UserChatService{
             throw new HttpException(error.message , HttpStatus.BAD_REQUEST);
         }
     }
+
+    async findAllUserChats(username: string): Promise<UserChat[]>{
+        const userChats = await this.userChatModel.findAll({where: {username:username}});
+        return userChats;
+    }
 }
