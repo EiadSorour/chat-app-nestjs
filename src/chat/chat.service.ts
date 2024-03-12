@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { Chat } from "./chat.model";
-import { CreateChatDto } from "./dto/creaetChatDto";
+import { CreateChatDto } from "./dto/createChatDto";
 
 
 @Injectable()

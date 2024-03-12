@@ -1,8 +1,7 @@
-import { Body, Controller, Get, HttpCode, Post } from "@nestjs/common";
+import { Body, Controller, HttpCode, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { UserRegisterDto } from "./dto/userRegister.dto";
 import { HttpStatusMessage } from "src/utils/HttpStatusMessage";
-import { UserLoginDto } from "./dto/userLogin.dto";
+import { UserDto } from "./dto/userDto";
 
 @Controller("/api/user")
 export class AuthController{
@@ -11,15 +10,15 @@ export class AuthController{
     
     @Post("/register")
     @HttpCode(201)
-    async register(@Body() userRegisterDto:UserRegisterDto){
-        const token = await this.authService.register(userRegisterDto);
+    async register(@Body() userDto:UserDto){
+        const token = await this.authService.register(userDto);
         return {status: HttpStatusMessage.SUCCESS , data: {token:token}}
     }
 
     @Post("/login")
     @HttpCode(200)
-    async login( @Body() userLoginDto:UserLoginDto ){
-        const token = await this.authService.login(userLoginDto);
+    async login( @Body() userDto:UserDto ){
+        const token = await this.authService.login(userDto);
         return {status: HttpStatusMessage.SUCCESS , data: {token:token}}
     }
 }

@@ -1,7 +1,6 @@
-import { Model, Column, Table, ForeignKey, DataType, BelongsTo } from "sequelize-typescript";
+import { Model, Column, Table, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { Chat } from "src/chat/chat.model";
 import { User } from "src/user/user.model";
-
 
 @Table
 export class Message extends Model{

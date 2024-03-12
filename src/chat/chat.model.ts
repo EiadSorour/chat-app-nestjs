@@ -3,7 +3,6 @@ import { Message } from "src/message/message.model";
 import { UserChat } from "src/user-chat/user-chat.model";
 import { User } from "src/user/user.model";
 
-
 @Table
 export class Chat extends Model{
 

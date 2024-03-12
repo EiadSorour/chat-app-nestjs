@@ -1,8 +1,8 @@
 import { ConnectedSocket, MessageBody, OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer } from "@nestjs/websockets";
 import { Socket, Server } from "socket.io";
 import { EventsService } from "./events.service";
-import { CreateChatDto } from "src/chat/dto/creaetChatDto";
-import { UseGuards, UseInterceptors } from "@nestjs/common";
+import { CreateChatDto } from "src/chat/dto/createChatDto";
+import { UseGuards } from "@nestjs/common";
 import { AuthGuard } from "src/guards/authentication.guard";
 import { SendMessageDto } from "./dto/sendMessageDto";
 
@@ -17,19 +17,23 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
     @WebSocketServer()
     server: Server
 
-    afterInit(server:Server){}
+    afterInit(server:Server){
+
+    }
 
     async handleConnection(client:Socket) {
         const token = client.handshake.headers.authorization.split(" ")[1];
         const payload = this.eventsService.verifyUser(token);
         const username = payload.username;
-        const chats = await this.eventsService.getUserToChats(username);
+        const chats = await this.eventsService.getChatsOfUser(username);
         await client.join(chats);
         console.log(`Rooms of ${username}:`);
         console.log(client.rooms);
     }
 
-    handleDisconnect(client:Socket) {}
+    handleDisconnect(client:Socket) {
+
+    }
 
     @SubscribeMessage("createChat")
     async handleCreateChat(@MessageBody() createChatDto: CreateChatDto){
@@ -68,8 +72,8 @@ export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGate
         client.to(chatID).emit("newMessage" , messageText);
     }
 
-    @SubscribeMessage("test")
-    async handleTest(@MessageBody() messageBody: any , @ConnectedSocket() client: Socket){
-        client.to(String(messageBody.chatID)).emit("newMessage", messageBody.message);
-    }
+    // @SubscribeMessage("test")
+    // async handleTest(@MessageBody() messageBody: any , @ConnectedSocket() client: Socket){
+    //     client.to(String(messageBody.chatID)).emit("newMessage", messageBody.message);
+    // }
 }

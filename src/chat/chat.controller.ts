@@ -1,8 +1,7 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, HttpCode, HttpStatus, Param, Post } from "@nestjs/common";
 import { ChatService } from "./chat.service";
-import { Chat } from "./chat.model";
 import { HttpStatusMessage } from "src/utils/HttpStatusMessage";
-import { CreateChatDto } from "./dto/creaetChatDto";
+import { CreateChatDto } from "./dto/createChatDto";
 
 
 @Controller("/api/chat")

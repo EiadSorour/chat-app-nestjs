@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import { Module } from "@nestjs/common";
 import { EventsGateway } from "./events.gateway";
 import { EventsService } from "./events.service";
 import { ChatModule } from "src/chat/chat.module";
